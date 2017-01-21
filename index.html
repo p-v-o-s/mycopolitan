@@ -56,12 +56,7 @@
       google.setOnLoadCallback(drawChart);
 </script>
 
-<script>
-     setTimeout(function(){
-   window.location.reload(1);
-}, 30000);
 
-    </script>
     
   <script>
 
@@ -114,7 +109,64 @@
 
     </script>
     
- 
+  <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'j9jXBkyY39CwAark4Wa9fDDqOgxj';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'http://159.203.128.53/output/' + public_key + '?limit=10.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'temp');
+          //data.addColumn('number', 'humidity_am2315');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.temp)
+              //parseFloat(row.humidity_am2315)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#temp').get(0));
+
+          chart.draw(data, {
+            title: 'Temp (C)',
+            pointSize: 5
+          });
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+     
+
+    </script>
+    
+ <script>
+     setTimeout(function(){
+   window.location.reload(1);
+}, 30000);
+
+</script>
+    
   </head>
   <body>
     <div id="co2" style="width: 100%;"></div>
