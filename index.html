@@ -132,7 +132,7 @@
           $.each(results, function (i, row) {
             data.addRow([
               (new Date(row.timestamp)),
-              parseFloat(row.temp)
+              parseFloat(row.temp)*9/5+32.
               //parseFloat(row.humidity_am2315)
             ]);
           });
@@ -140,7 +140,7 @@
           var chart = new google.visualization.LineChart($('#temp').get(0));
 
           chart.draw(data, {
-            title: 'Temp (C)',
+            title: 'Temp (F)',
             pointSize: 5
           });
 
