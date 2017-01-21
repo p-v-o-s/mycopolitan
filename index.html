@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+ 
+  
+    <!-- EXTERNAL LIBS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+
+    <!-- EXAMPLE SCRIPT -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'j9jXBkyY39CwAark4Wa9fDDqOgxj';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'http://159.203.128.53/output/' + public_key + '?limit=100.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'co2_ppm');
+          //data.addColumn('number', 'humidity_am2315');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.co2_ppm)
+              //parseFloat(row.humidity_am2315)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chart').get(0));
+
+          chart.draw(data, {
+            title: 'Mycopolitan Sensor #1'
+          });
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+     setTimeout(function(){
+   window.location.reload(1);
+}, 10000);
+
+    </script>
+    
+ 
+ 
+  </head>
+  <body>
+    <div id="chart" style="width: 100%;"></div>
+  </body>
+</html>
