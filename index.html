@@ -25,7 +25,7 @@
           var data = new google.visualization.DataTable();
 
           data.addColumn('datetime', 'Time');
-          data.addColumn('number', 'co2_ppm');
+          data.addColumn('number', 'co2');
           //data.addColumn('number', 'humidity_am2315');
 
           $.each(results, function (i, row) {
@@ -39,7 +39,7 @@
           var chart = new google.visualization.LineChart($('#chart').get(0));
 
           chart.draw(data, {
-            title: 'Mycopolitan Sensor #1',
+            title: 'Mycopolitan CO2 (ppm)',
             pointSize: 5
           });
 
