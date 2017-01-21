@@ -54,7 +54,9 @@
 
       // call drawChart once google charts is loaded
       google.setOnLoadCallback(drawChart);
+</script>
 
+<script>
      setTimeout(function(){
    window.location.reload(1);
 }, 30000);
@@ -84,7 +86,7 @@
           $.each(results, function (i, row) {
             data.addRow([
               (new Date(row.timestamp)),
-              parseFloat(row.humidity)
+              parseFloat(row.humid)
               //parseFloat(row.humidity_am2315)
             ]);
           });
@@ -108,9 +110,7 @@
       // call drawChart once google charts is loaded
       google.setOnLoadCallback(drawChart);
 
-     setTimeout(function(){
-   window.location.reload(1);
-}, 30000);
+     
 
     </script>
     
