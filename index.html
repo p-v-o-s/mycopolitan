@@ -17,7 +17,7 @@
 
         // JSONP request
         var jsonData = $.ajax({
-          url: 'http://159.203.128.53/output/' + public_key + '?limit=100.json',
+          url: 'http://159.203.128.53/output/' + public_key + '?limit=5.json',
           data: {page: 1},
           dataType: 'jsonp',
         }).done(function (results) {
