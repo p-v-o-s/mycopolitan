@@ -18,8 +18,8 @@
         // JSONP request
         var jsonData = $.ajax({
          // url: 'http://159.203.128.53/output/' + public_key + '?limit=50.json',
-           url: 'http://159.203.128.53/output/' + public_key + '.json',
-          data: {page: 1},
+           //url: 'http://159.203.128.53/output/' + public_key + '.json',
+          url: 'http://159.203.128.53/output/' + public_key + '?sample=4.json',    data: {page: 1},
           dataType: 'jsonp',
         }).done(function (results) {
 
@@ -41,7 +41,7 @@
 
           chart.draw(data, {
             title: 'CO2 (ppm)',
-            pointSize: 5
+            //pointSize: 5
           });
 
         });
@@ -69,8 +69,8 @@
         // JSONP request
         var jsonData = $.ajax({
           //url: 'http://159.203.128.53/output/' + public_key + '?limit=50.json',
-          url: 'http://159.203.128.53/output/' + public_key + '.json',
-          data: {page: 1},
+          //url: 'http://159.203.128.53/output/' + public_key + '.json',
+          url: 'http://159.203.128.53/output/' + public_key + '?sample=4.json',data: {page: 1},
           dataType: 'jsonp',
         }).done(function (results) {
 
@@ -92,7 +92,7 @@
 
           chart.draw(data, {
             title: 'Humidity (% RH)',
-            pointSize: 5
+            //pointSize: 5
           });
 
         });
@@ -121,7 +121,8 @@
         // JSONP request
         var jsonData = $.ajax({
           //url: 'http://159.203.128.53/output/' + public_key + '?limit=50.json',
-          url: 'http://159.203.128.53/output/' + public_key + '.json',
+          //url: 'http://159.203.128.53/output/' + public_key + '.json',
+          url: 'http://159.203.128.53/output/' + public_key + '?sample=4.json',
           data: {page: 1},
           dataType: 'jsonp',
         }).done(function (results) {
@@ -144,7 +145,7 @@
 
           chart.draw(data, {
             title: 'Temp (F)',
-            pointSize: 5
+            //pointSize: 5
           });
 
         });
