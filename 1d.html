@@ -10,108 +10,51 @@
     <!-- EXAMPLE SCRIPT -->
     <script>
       // onload callback
-      function drawChart() {
+      function drawCharts() {
         var public_key = 'OPk64aQNvQhxJ19JAbyYToypKKA';
         // JSONP request
         var jsonData = $.ajax({
-         // url: 'http://159.203.128.53/output/' + public_key + '?limit=50.json',
-           //url: 'http://159.203.128.53/output/' + public_key + '.json',
           url: 'http://159.203.128.53/output/' + public_key + '?limit=1440.json',
           //data: {page: 1},
           dataType: 'jsonp',
         }).done(function (results) {
-          var data = new google.visualization.DataTable();
-          data.addColumn('datetime', 'Time');
-          data.addColumn('number', 'co2');
-          //data.addColumn('number', 'humidity_am2315');
+          var data1 = new google.visualization.DataTable();
+          data1.addColumn('datetime', 'Time');
+          data1.addColumn('number', 'co2');
+          var data2 = new google.visualization.DataTable();
+          data2.addColumn('datetime', 'Time');
+          data2.addColumn('number', 'humidity');
+          var data3 = new google.visualization.DataTable();
+          data3.addColumn('datetime', 'Time');
+          data3.addColumn('number', 'temp');
           $.each(results, function (i, row) {
-            data.addRow([
+            data1.addRow([
               (new Date(row.timestamp)),
               parseFloat(row.co2_ppm)
-              //parseFloat(row.humidity_am2315)
             ]);
-          });
-          var chart = new google.visualization.LineChart($('#co2').get(0));
-          chart.draw(data, {
-            title: 'CO2 (ppm)',
-            //pointSize: 5
-          });
-        });
-      }
-      // load chart lib
-      google.load('visualization', '1', {
-        packages: ['corechart']
-      });
-      // call drawChart once google charts is loaded
-      google.setOnLoadCallback(drawChart);
-</script>
-
-
-    
-  <script>
-      // onload callback
-      function drawChart() {
-        var public_key = 'OPk64aQNvQhxJ19JAbyYToypKKA';
-        // JSONP request
-        var jsonData = $.ajax({
-          //url: 'http://159.203.128.53/output/' + public_key + '?limit=50.json',
-          //url: 'http://159.203.128.53/output/' + public_key + '.json',
-          url: 'http://159.203.128.53/output/' + public_key + '?limit=1440.json',
-          //data: {page: 1},
-          dataType: 'jsonp',
-        }).done(function (results) {
-          var data = new google.visualization.DataTable();
-          data.addColumn('datetime', 'Time');
-          data.addColumn('number', 'humidity');
-          //data.addColumn('number', 'humidity_am2315');
-          $.each(results, function (i, row) {
-            data.addRow([
+            data2.addRow([
               (new Date(row.timestamp)),
               parseFloat(row.humid)
               //parseFloat(row.humidity_am2315)
             ]);
-          });
-          var chart = new google.visualization.LineChart($('#humidity').get(0));
-          chart.draw(data, {
-            title: 'Humidity (% RH)',
-            //pointSize: 5
-          });
-        });
-      }
-      // load chart lib
-      google.load('visualization', '1', {
-        packages: ['corechart']
-      });
-      // call drawChart once google charts is loaded
-      google.setOnLoadCallback(drawChart);
-     
-    </script>
-    
-  <script>
-      // onload callback
-      function drawChart() {
-        var public_key = 'OPk64aQNvQhxJ19JAbyYToypKKA';
-        // JSONP request
-        var jsonData = $.ajax({
-          //url: 'http://159.203.128.53/output/' + public_key + '?limit=50.json',
-          //url: 'http://159.203.128.53/output/' + public_key + '.json',
-          url: 'http://159.203.128.53/output/' + public_key + '?limit=1440.json',
-          //data: {page: 1},
-          dataType: 'jsonp',
-        }).done(function (results) {
-          var data = new google.visualization.DataTable();
-          data.addColumn('datetime', 'Time');
-          data.addColumn('number', 'temp');
-          //data.addColumn('number', 'humidity_am2315');
-          $.each(results, function (i, row) {
-            data.addRow([
+            data3.addRow([
               (new Date(row.timestamp)),
-              parseFloat(row.temp)*9/5+32.
+              parseFloat(row.temp)*9/5+32. //convert to deg F
               //parseFloat(row.humidity_am2315)
             ]);
           });
-          var chart = new google.visualization.LineChart($('#temp').get(0));
-          chart.draw(data, {
+          var chart1 = new google.visualization.LineChart($('#co2').get(0));
+          chart.draw(data1, {
+            title: 'CO2 (ppm)',
+            //pointSize: 5
+          });
+          var chart2 = new google.visualization.LineChart($('#humidity').get(0));
+          chart.draw(data2, {
+            title: 'Humidity (% RH)',
+            //pointSize: 5
+          });
+          var chart3 = new google.visualization.LineChart($('#temp').get(0));
+          chart.draw(data3, {
             title: 'Temp (F)',
             //pointSize: 5
           });
@@ -122,9 +65,8 @@
         packages: ['corechart']
       });
       // call drawChart once google charts is loaded
-      google.setOnLoadCallback(drawChart);
-     
-    </script>
+      google.setOnLoadCallback(drawCharts);
+</script>
     
     <!--
  <script>
